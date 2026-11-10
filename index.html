@@ -13,8 +13,16 @@
 *{box-sizing:border-box}
 body{background:var(--desk);color:var(--ink);font-family:var(--ui);font-size:14px;
   padding-block:20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.app{display:flex;flex-wrap:wrap-reverse;gap:24px;justify-content:center;align-items:flex-start;max-width:1100px;margin:0 auto}
-.stage{display:flex;flex-direction:column;align-items:center;gap:10px;max-width:100%}
+.app{display:grid;grid-template-columns:400px auto;gap:28px;justify-content:center;align-items:start;margin:0 auto}
+.desk{grid-column:1;grid-row:1;max-height:calc(100vh - 40px);overflow-y:auto}
+.stage{grid-column:2;grid-row:1;position:sticky;top:20px;display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0}
+.stage #cover{width:min(405px,calc((100vh - 80px) * 9 / 16))}
+@media (max-width:820px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .stage{grid-column:1;grid-row:1;position:static}
+  .desk{grid-row:2;max-height:none;width:100%}
+  .stage #cover{width:min(405px,100%)}
+}
 .stage small{color:var(--mute);font-size:12px;text-align:center}
 
 /* ---------- the cover ---------- */
@@ -65,10 +73,10 @@ input[type=range]{accent-color:var(--brand-hi);width:100%}
 .btn.go{background:var(--brand);border-color:var(--brand)}
 .btns{display:flex;flex-wrap:wrap;gap:6px}
 .grid{display:grid;gap:8px}
-.themes{grid-template-columns:repeat(3,1fr)}
+.themes{grid-template-columns:repeat(4,1fr)}
 .thm{border:2px solid transparent;border-radius:10px;cursor:pointer;padding:0;background:none;display:flex;flex-direction:column;gap:4px;color:var(--mute);font:600 11px var(--ui)}
 .thm.on{border-color:var(--brand-hi);color:var(--ink)}
-.mini{width:100%;aspect-ratio:9/12;border-radius:8px;display:block;position:relative;overflow:hidden}
+.mini{width:100%;aspect-ratio:9/10;border-radius:8px;display:block;position:relative;overflow:hidden}
 .mini i{position:absolute;left:12%;right:12%;height:9%;border-radius:3px}
 .styles{grid-template-columns:repeat(3,1fr)}
 .sty{background:var(--raise);border:2px solid transparent;border-radius:9px;padding:8px 4px;cursor:pointer;color:var(--ink);font:700 12px var(--ui)}
